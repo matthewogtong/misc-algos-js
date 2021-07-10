@@ -47,35 +47,63 @@ let sampleScores = [5, 4, 3, 2, 2]
 let cutoff = 4
 // console.log(levelUp(sampleScores, rank))
 
+
+// *** BELOW FUNCTION ALMOST WORKS
+// function numPlayers(k, scores) {
+//     // Write your code here
+//     if (k<=0 || scores.length === 0) return 0;
+//     let sortedScores = scores.sort((a, b)=>b-a)
+//     if (sortedScores[0]===0) {
+//         return 0;
+//     } else if (sortedScores[0]===sortedScores[scores.length-1]) {
+//         return scores.length;
+//     }
+    
+//     let rank=1;
+//     let total=1;
+//     let counter=0;
+//     let highscores=[];
+//     highscores.push(sortedScores[0])
+    
+//     for (let i=1; i<scores.length; i++) {
+//         let score = sortedScores[i];
+//         if (rank>=k && highscores.indexOf(score) === -1) return total;
+//         if (highscores.includes(score)) {
+//             total++;
+//             counter++;
+//         } else {
+//             total++;
+//             highscores.push(score);
+//             counter ? rank+=counter : rank++;
+//             counter=0;
+//         }
+//     }
+//     return total;
+// }
+
 function numPlayers(k, scores) {
     // Write your code here
-    if (k<=0 || scores.length === 0) return 0;
-    let sortedScores = scores.sort((a, b)=>b-a)
-    if (sortedScores[0]===0) {
-        return 0;
-    } else if (sortedScores[0]===sortedScores[scores.length-1]) {
-        return scores.length;
+    let counter = new Array(101).fill(0)
+    for (let num of scores) {
+        counter[num]++
     }
     
-    let rank=1;
-    let total=1;
-    let counter=0;
-    let highscores=[];
-    highscores.push(sortedScores[0])
+    let total = 0;
+    let rank = 0;
     
-    for (let i=1; i<scores.length; i++) {
-        let score = sortedScores[i];
-        if (rank>=k && highscores.indexOf(score) === -1) return total;
-        if (highscores.includes(score)) {
-            total++;
-            counter++;
-        } else {
-            total++;
-            highscores.push(score);
-            counter ? rank+=counter : rank++;
-            counter=0;
+    for (let i = 100; i >=0; i--) {
+        if (i === 0) {
+            rank += counter[i];
+        } else if (counter[i] > 0) {
+            total+= counter[i];
+            rank += counter[i];
+        }
+        
+        if (rank >= k) {
+            return total;
         }
     }
+    
     return total;
 }
 
