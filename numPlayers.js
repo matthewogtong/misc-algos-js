@@ -48,9 +48,9 @@ let cutoff = 4
 // console.log(levelUp(sampleScores, rank))
 
 function numPlayers(k, scores) {
-    
+    // Write your code here
     if (k<=0 || scores.length === 0) return 0;
-    let sortedScores = scores.sort((a, b)=>b-a);
+    let sortedScores = scores.sort((a, b)=>b-a)
     if (sortedScores[0]===0) {
         return 0;
     } else if (sortedScores[0]===sortedScores[scores.length-1]) {
@@ -62,24 +62,21 @@ function numPlayers(k, scores) {
     let counter=0;
     let highscores=[];
     highscores.push(sortedScores[0])
-
+    
     for (let i=1; i<scores.length; i++) {
         let score = sortedScores[i];
-        if (rank>=k && score !== sortedScores[i-1]) return total;
+        if (rank>=k && highscores.indexOf(score) === -1) return total;
         if (highscores.includes(score)) {
             total++;
             counter++;
-        } else if (score === 0) {
-            break;
         } else {
             total++;
-            highscores.push(score)
+            highscores.push(score);
             counter ? rank+=counter : rank++;
-            counter = 0 ;
+            counter=0;
         }
-
     }
-    return total
+    return total;
 }
 
 console.log(numPlayers(cutoff, sampleScores))
