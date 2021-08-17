@@ -32,3 +32,5 @@ let str2 = "ttew";
 if (arePermutation(str1, str2)) document.write("Yes");
 else document.write("No");
 
+
+
