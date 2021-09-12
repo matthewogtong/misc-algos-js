@@ -7,7 +7,6 @@ Given a string, return the character that appears the maximum number of times in
  * Complete the 'maximumOccurringCharacter' function below.
  *
  * The function is expected to return a CHARACTER.
- * The function accepts STRING text as parameter.
  */
 
 function maximumOccurringCharacter(text) {
